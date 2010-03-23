@@ -26,7 +26,7 @@ module D2S3
             ['starts-with', '$key', '#{key}'],
             {'acl': '#{acl}'},
             {'success_action_redirect': '#{redirect}'},
-            ['starts-with', '#{content_type}', ''],
+            ['starts-with', '$Content-Type', '#{content_type}'],
             ['content-length-range', 0, #{max_filesize}]
           ]
         }").gsub(/\n|\r/, '')
