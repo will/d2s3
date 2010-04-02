@@ -42,7 +42,7 @@ module D2S3
           <input type="hidden" name="success_action_redirect" value="#{redirect}">
           <input type="hidden" name="policy" value="#{policy}">
           <input type="hidden" name="signature" value="#{signature}">
-          <input type="hidden" name="Content-Type" value="#{content_type}"
+          <input type="hidden" name="Content-Type" value="#{content_type}">
           <input name="file" type="file">#{submit_button}
           </form>
         )
