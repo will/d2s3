@@ -9,6 +9,7 @@ module D2S3
       access_key_id   = D2S3::S3Config.access_key_id
       key             = options[:key] || ''
       content_type    = options[:content_type] || '' # Defaults to binary/octet-stream if blank
+      cache_control   = options[:cache_control] || 'no-cache'
       redirect        = options[:redirect] || '/'
       acl             = options[:acl] || 'public-read'
       expiration_date = (options[:expiration_date] || 10.hours).from_now.utc.strftime('%Y-%m-%dT%H:%M:%S.000Z')
@@ -28,6 +29,7 @@ module D2S3
             {'acl': '#{acl}'},
             {'success_action_redirect': '#{redirect}'},
             ['starts-with', '$Content-Type', '#{content_type}'],
+            ['starts-with', '$Cache-Control', '#{cache_control}'],
             ['content-length-range', #{min_filesize}, #{max_filesize}]
           ]
         }").gsub(/\n|\r/, '')
@@ -43,6 +45,7 @@ module D2S3
           <input type="hidden" name="policy" value="#{policy}">
           <input type="hidden" name="signature" value="#{signature}">
           <input type="hidden" name="Content-Type" value="#{content_type}">
+          <input type="hidden" name="Cache-Control" value="#{cache_control}">
           <input name="file" type="file">#{submit_button}
           </form>
         )
